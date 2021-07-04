@@ -3,8 +3,6 @@
 
 /* +++++ VARIABLES DE ENTORNO DE JENKINS +++++ */
 //http://localhost:8080/env-vars.html/ 
-def gv 
-
 pipeline {
     agent any
     /*environment {
@@ -17,18 +15,15 @@ pipeline {
         booleanParam(name: 'executeTests', defaultValue: true, description: '')
     }
     stages {
-        stage("init"){
-            steps{
-               script {
-                   gv = load "script.groovy"
-               }
-            }
-        }
         stage("build"){
+            /*when {
+                expression {
+                    //env.BRANCH_NAME == 'dev' && CODE_CHANGES == true
+                }
+            }*/
             steps{
-               script {
-                   gv.buildApp()
-               }
+                echo 'building the application...'
+                //echo "building version ${NEW_VERSION}"
             }
         }
         stage("test"){
@@ -40,16 +35,19 @@ pipeline {
                 }
             }
             steps{
-                script {
-                   gv.testApp()
-                }
+                echo 'testing the application...'
             }
         }
         stage("deploy"){
             steps{
-                script {
-                   gv.deployApp()
-               }
+                echo 'deploying the application...'
+                //echo "deploying with ${SERVER_CREDENTIALS}"
+                /*withCredentials([
+                    usernamePassword(credentials: 'server-credentials',usernameVariable: USER, passwordVariable: PWD)
+                ]){
+                    // sh "some script ${USER} ${PWD}"
+                }*/
+                echo "deploying version ${params.VERSION}"
             }
         }
     }
