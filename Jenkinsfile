@@ -16,11 +16,11 @@ pipeline {
     }
     stages {
         stage("build"){
-            when {
+            /*when {
                 expression {
                     //env.BRANCH_NAME == 'dev' && CODE_CHANGES == true
                 }
-            }
+            }*/
             steps{
                 echo 'building the application...'
                 echo "building version ${NEW_VERSION}"
