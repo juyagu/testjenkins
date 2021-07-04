@@ -42,16 +42,16 @@ pipeline {
             steps{
                 echo 'deploying the application...'
                 //echo "deploying with ${SERVER_CREDENTIALS}"
-                withCredentials([
+                /*withCredentials([
                     usernamePassword(credentials: 'server-credentials',usernameVariable: USER, passwordVariable: PWD)
                 ]){
                     // sh "some script ${USER} ${PWD}"
-                }
+                }*/
                 echo "deploying version ${params.VERSION}"
             }
         }
     }
-    post {
+    /*post {
         always {
             // esto se va a ejecutar siempre si importar si se completan los pasos o no
         }
@@ -61,5 +61,5 @@ pipeline {
         failure {
             // Si falla se ejecuta este bloque
         }
-    }
+    }*/
 }
