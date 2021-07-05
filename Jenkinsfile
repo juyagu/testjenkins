@@ -24,6 +24,11 @@ pipeline {
                }
             }
         }
+        stage("testloco"){
+            steps{
+               echo "Estoy re loco"
+            }
+        }
         stage("build"){
             steps{
                script {
